@@ -3,6 +3,13 @@
 let deck         = [];
 const tipos      = ['C','D','H','S'];
 const especiales = ['A','J','Q','K'];
+let puntosJugador = 0,
+    puntosComputadora = 0;
+
+ //Referencias el HTML
+ const btnpedir = document.querySelector('#btnpedir');
+ const puntosHTML = document.querySelectorAll('small');
+
 
 // Esta funcion crea una nueva funcion
 const crearDeck = () => {
@@ -29,11 +36,8 @@ crearDeck()
 const pedirCarta = () =>{
 if(deck.length === 0){
 throw 'no hay cartas en el deck';
-
 }
 const carta = deck.pop();
-console.log(deck);
-console.log(carta);
     return carta;
 }
  //   pedirCarta();
@@ -45,5 +49,12 @@ const valorCarta = (carta) =>{
           : valor * 1;
  
 }
-const valor = valorCarta(pedirCarta());
-console.log({valor});
+// Eventos
+btnpedir.addEventListener('click',()=>{
+
+const carta = pedirCarta();
+
+puntosJugador = puntosJugador + valorCarta(carta);
+puntosHTML[0].innerText = puntosJugador;
+
+});
